@@ -370,7 +370,7 @@ WORD  dataLength=6;
    }   
    // byte 6 & 7 contain the sender's TNS value
    byteCount = 0;
-   if (m_protocolEthernet){
+   if (m_protocolModbusTCP){
    		totalLen = dataLength +6;//13;  6+6=12 bytes
    }else {
    		totalLen = dataLength;// +6;//13;  6+6=12 bytes

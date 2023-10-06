@@ -47,7 +47,7 @@ PCHAR MODBUSplcError[9] =
    "Memory Parity error"      // 0x8
 };  
 
-BOOL CMODMessage::m_protocolEthernet = FALSE;   // default to serial
+BOOL CMODMessage::m_protocolModbusTCP = FALSE;   // default to serial
 BOOL m_msgLenOK = FALSE;                        // Added 2015-01-25 by DL to hold Message Length Check
 int FC = 0;                                     // Added 2015-01-25 by DL to hold FC across functions
 DWORD m_noiseLength;                            // Added 2015-02-01 by DL
@@ -64,14 +64,14 @@ static BYTE EthernetHeader[4]= {
       };
 
    m_packError = FALSE;
-   frameEthernet = m_protocolEthernet;
+   frameEthernet = m_protocolModbusTCP;
    //frameASCII = FALSE;   // Deleted 2015-Dec-19 by DL because it is not needed
 
    // break it down
    pTelePtr = (BYTE*)pMessageRX;
    totalLen = (WORD)len;
    count = 0;
-   if (m_protocolEthernet) //not PROTOCOL_SELMODETH_RTU
+   if (m_protocolModbusTCP) //not PROTOCOL_SELMODETH_RTU
    {
 	  // Needs to handle short packets such as two bytes from Eth better. DL on 2016-09-14
       m_EthernetTransNum = *(WORD*)pTelePtr;
@@ -192,12 +192,12 @@ static BYTE EthernetHeader[4]= {
    {
       ASSERT(totalLen >= overalLen - ETH_PREAMBLE_LENGTH); // range-check here
       // Ethernet frame does not have an embedded CRC
-      if ((m_protocolEthernet) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH))      
+      if ((m_protocolModbusTCP) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH))      
          overalLen = totalLen - ETH_PREAMBLE_LENGTH;
          // turf this message it is duff!
          m_packError = TRUE;     
       // Ethernet_RTU (Modbus RTU over TCP frame) does not have  CRC  
-      if (!(m_protocolEthernet) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH + MODBUS_CRC_LEN)
+      if (!(m_protocolModbusTCP) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH + MODBUS_CRC_LEN)
       {
          overalLen = totalLen - ETH_PREAMBLE_LENGTH;
          // turf this message it is duff!
@@ -327,9 +327,9 @@ BYTE numBytesData;
 // supply FALSE for normal serial 232 frames
 BOOL CMODMessage::SetEthernetFrames(BOOL ethernetFrames/* = TRUE*/)
 {
-BOOL oldV = m_protocolEthernet;
-   m_protocolEthernet = ethernetFrames;
-   return (m_protocolEthernet);
+BOOL oldV = m_protocolModbusTCP;
+   m_protocolModbusTCP = ethernetFrames;
+   return (m_protocolModbusTCP);
 }
 
 // ------------------------------ BuildMessageEnd -------------------------------
