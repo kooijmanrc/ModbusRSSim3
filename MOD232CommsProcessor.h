@@ -179,7 +179,7 @@ public:
    WORD GetEthernetTransNum() { return(m_EthernetTransNum);}
 private:
    BOOL crcCheckedOK;
-   static BOOL m_protocolModbusTCP;
+   static BOOL m_protocolEthernet;
    WORD  m_EthernetTransNum;
 };
 
