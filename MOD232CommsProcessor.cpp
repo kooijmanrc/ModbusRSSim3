@@ -71,7 +71,7 @@ static BYTE EthernetHeader[4]= {
    pTelePtr = (BYTE*)pMessageRX;
    totalLen = (WORD)len;
    count = 0;
-   if (m_selectedProtocol == PROTOCOL_SELMODETH) //not PROTOCOL_SELMODETH_RTU
+   if (m_protocolEthernet) //not PROTOCOL_SELMODETH_RTU
    {
 	  // Needs to handle short packets such as two bytes from Eth better. DL on 2016-09-14
       m_EthernetTransNum = *(WORD*)pTelePtr;
@@ -192,12 +192,12 @@ static BYTE EthernetHeader[4]= {
    {
       ASSERT(totalLen >= overalLen - ETH_PREAMBLE_LENGTH); // range-check here
       // Ethernet frame does not have an embedded CRC
-      if ((m_selectedProtocol == PROTOCOL_SELMODETH) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH))      
+      if ((m_protocolEthernet) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH))      
          overalLen = totalLen - ETH_PREAMBLE_LENGTH;
          // turf this message it is duff!
          m_packError = TRUE;     
       // Ethernet_RTU (Modbus RTU over TCP frame) does not have  CRC  
-      if ((m_selectedProtocol == PROTOCOL_SELMODETH_RTU) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH + MODBUS_CRC_LEN)
+      if (!(m_protocolEthernet) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH + MODBUS_CRC_LEN)
       {
          overalLen = totalLen - ETH_PREAMBLE_LENGTH;
          // turf this message it is duff!

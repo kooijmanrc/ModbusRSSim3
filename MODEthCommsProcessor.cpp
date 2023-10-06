@@ -31,7 +31,7 @@ static char THIS_FILE[]=__FILE__;
 #endif
 
 
-#define MAX_MOD_MESSAGELENGTH  2048
+#define MAX_MOD_MESSAGELENGTH  2048*4
 
 
 
@@ -866,7 +866,7 @@ WORD WriteStartAddress;
    
    // THERE IS no CRC, so do not call BuildMessageEnd
    responseModMsg.totalLen = (WORD)((LONG)pDataPortion-(LONG)responseModMsg.buffer);
-   if !(m_selectedProtocol == PROTOCOL_SELMODETH)	  
+   if !(m_protocolEthernet)	  
       responseModMsg.totalLen += MODBUS_CRC_LEN;   // Add CRC
 
 
@@ -876,9 +876,9 @@ WORD WriteStartAddress;
 
    // insert the frame info
    //responseModMsg
-   if (responseModMsg.totalLen > 4100)         // Added on 2015-01-11 by DL because one failure was 13412
+   if (responseModMsg.totalLen > MAX_MOD_MESSAGELENGTH)         // Added on 2015-01-11 by DL because one failure was 13412
       return (FALSE);                         // This was the Bit Write to 65536 that caused a crash in mod_RSsim
-  if (m_selectedProtocol == PROTOCOL_SELMODETH){
+  if !(m_protocolEthernet){
     responseLen = 0 + responseModMsg.totalLen; //SwapBytes(*(WORD*)(responseModMsg.preambleLenPtr)) + 6; //hdr;
     responseModMsg.buffer[2] = 0x00; //set message length to zero  // why [2] and not [3].. (2nd byte?) this is setting 3rd byte to 0.
    // Append the CRC

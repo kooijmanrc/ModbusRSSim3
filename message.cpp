@@ -370,11 +370,11 @@ WORD  dataLength=6;
    }   
    // byte 6 & 7 contain the sender's TNS value
    byteCount = 0;
-   if (m_selectedProtocol == PROTOCOL_SELMODETH)
+   if (m_protocolEthernet){
    		totalLen = dataLength +6;//13;  6+6=12 bytes
-   else 
+   }else {
    		totalLen = dataLength;// +6;//13;  6+6=12 bytes
-   		
+   }	
    return(buffer);
 } // BuildMessagePreamble
 
