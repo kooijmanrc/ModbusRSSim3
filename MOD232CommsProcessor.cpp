@@ -71,15 +71,23 @@ static BYTE EthernetHeader[4]= {
    pTelePtr = (BYTE*)pMessageRX;
    totalLen = (WORD)len;
    count = 0;
-   if (m_protocolEthernet) //not PROTOCOL_SELMODETH_RTU
-   {
+   if (pGlobalDialog->m_selectedProtocol == PROTOCOL_SELMODETH_RTU) {//not PROTOCOL_SELMODETH_RTU
 	  // Needs to handle short packets such as two bytes from Eth better. DL on 2016-09-14
       m_EthernetTransNum = *(WORD*)pTelePtr;
-      pTelePtr += sizeof(EthernetHeader);
+     // pTelePtr += sizeof(EthernetHeader);
       // grab the TCP frame length from the actual headder
-      m_frameLength = *(WORD*)pTelePtr;
-      m_frameLength = SwapBytes(m_frameLength);
-      pTelePtr += sizeof(WORD);
+    //  m_frameLength = *(WORD*)pTelePtr;
+	  m_frameLength = totalLen - MODBUS_CRC_LEN;
+   //   pTelePtr += sizeof(WORD);
+   }
+   else {
+	   // Needs to handle short packets such as two bytes from Eth better. DL on 2016-09-14
+	   m_EthernetTransNum = *(WORD*)pTelePtr;
+	   pTelePtr += sizeof(EthernetHeader);
+	   // grab the TCP frame length from the actual headder
+	   m_frameLength = *(WORD*)pTelePtr;
+	   m_frameLength = SwapBytes(m_frameLength);
+	   pTelePtr += sizeof(WORD);
    }
    //Pre-Amble
    //if (frameASCII)     // Deleted Block 2015-Dec-19 by DL because it is not needed
@@ -197,7 +205,7 @@ static BYTE EthernetHeader[4]= {
          // turf this message it is duff!
          m_packError = TRUE;     
       // Ethernet_RTU (Modbus RTU over TCP frame) does not have  CRC  
-      if (!(m_protocolEthernet) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH + MODBUS_CRC_LEN)
+      if (!(m_protocolEthernet) && (totalLen < overalLen - ETH_PREAMBLE_LENGTH + MODBUS_CRC_LEN))
       {
          overalLen = totalLen - ETH_PREAMBLE_LENGTH;
          // turf this message it is duff!
@@ -824,6 +832,7 @@ CString deb;
 
                         // 1st 3 bytes + any others up to data get 
                         // added in at this time 
+   if (!(pGlobalDialog->m_selectedProtocol == PROTOCOL_SELMODETH_RTU))
    responseModMsg.BuildMessagePreamble(MBUSError,
                                        MBUSerrorCode); 
 

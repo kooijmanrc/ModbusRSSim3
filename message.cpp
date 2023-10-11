@@ -356,7 +356,7 @@ CHAR * CABMessage::BuildMessagePreamble(BOOL error, WORD errorCode)
 {
 WORD  crc = 0;
 WORD  dataLength=6;
-
+ 
    // swap the station IDs
    buffer[2] = stationIDSource;
    buffer[3] = stationIDDest;
@@ -367,14 +367,17 @@ WORD  dataLength=6;
    {
       buffer[8] = (BYTE)(errorCode>>8); //EXT-STS
       dataLength++;
-   }   
+   }
    // byte 6 & 7 contain the sender's TNS value
    byteCount = 0;
-   if (m_protocolEthernet){
-   		totalLen = dataLength +6;//13;  6+6=12 bytes
-   }else {
-   		totalLen = dataLength;// +6;//13;  6+6=12 bytes
-   }	
+   if (pGlobalDialog->m_selectedProtocol == PROTOCOL_SELMODETH_RTU) {
+	   totalLen = dataLength;//13;  6+6=12 bytes
+   }
+   else {
+	   totalLen = dataLength + 6;//13;  6+6=12 bytes
+   }
+
+
    return(buffer);
 } // BuildMessagePreamble
 

@@ -1,0 +1,71 @@
+﻿  Processing .\mod_RSsim.odl
+  mod_RSsim.odl
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\oaidl.idl
+  oaidl.idl
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\objidl.idl
+  objidl.idl
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\unknwn.idl
+  unknwn.idl
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\wtypes.idl
+  wtypes.idl
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\wtypesbase.idl
+  wtypesbase.idl
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\basetsd.h
+  basetsd.h
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\guiddef.h
+  guiddef.h
+  Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\oaidl.acf
+  oaidl.acf
+  StdAfx.cpp
+c:\development\2_wp\07 sim\29 modrssim extended and tcpip\modrssim2source8.21.2.7_v2\code\src\modrssim2\ddksocket.h(39): warning C4091: 'typedef ': ignored on left of 'dataDebugAttrib' when no variable is declared
+  _README.CPP
+  ABComms.cpp
+  ABCommsProcessor.cpp
+  About.cpp
+  ActiveScriptHost.cpp
+c:\development\2_wp\07 sim\29 modrssim extended and tcpip\modrssim2source8.21.2.7_v2\code\src\modrssim2\activescripthost.cpp(350): warning C4838: conversion from 'int' to 'UINT' requires a narrowing conversion
+  AdvEmulationDlg.cpp
+  AnimationSettings.cpp
+  CreditStatic.cpp
+  CSVFileImportDlg.cpp
+  CSVReader.cpp
+  DDKSocket.cpp
+  DDKSrvSocket.cpp
+  EasterDlg.cpp
+  EditMemoryDlg.cpp
+  FaultsDlg.cpp
+  FileEditCtrl.cpp
+  htmloutput.cpp
+  JoySCCEmulation.cpp
+  MemoryEditorList.cpp
+  MemWriteLock.cpp
+  Generating Code...
+  Compiling...
+  message.cpp
+  MOD232CommsProcessor.cpp
+  mod_RSsim.cpp
+c:\development\2_wp\07 sim\29 modrssim extended and tcpip\modrssim2source8.21.2.7_v2\code\src\modrssim2\mod_rssim.cpp(128): warning C4996: 'GetVersionExA': was declared deprecated
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\sysinfoapi.h(378): note: see declaration of 'GetVersionExA'
+  mod_RSsimDlg.cpp
+  MODEthCommsProcessor.cpp
+  MyHostProxy.cpp
+  PLCApplication.cpp
+  RS232Noise.cpp
+  RS232Port.cpp
+  SelfRegistrationDlg.cpp
+  serverRS232array.cpp
+  ServerSettings232Dlg.cpp
+  ServerSettingsEthDlg.cpp
+  ServerSocketArray.cpp
+  SimCmdLine.cpp
+  simport.cpp
+  Splash.cpp
+  StarWarsCtrl.cpp
+  stringcvt.cpp
+  TrainingSimDlg.cpp
+  Generating Code...
+  Compiling...
+  UpdateCheck.cpp
+  UTIL.CPP
+  Generating Code...
+  ModRSsim2.vcxproj -> C:\DEVELOPMENT\2_WP\07 sim\29 modrssim extended AND TCPIP\ModRSsim2Source8.21.2.7_v2\code\src\ModRSsim2\.\Release\ModRSsim2.exe
